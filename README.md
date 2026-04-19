@@ -101,6 +101,10 @@ Contributions are welcome! Please read our contributing guidelines and open an i
 
 For misdetections, please use the [misdetection issue template](.github/ISSUE_TEMPLATE/misdetection.md).
 
+## Notes (Personal)
+
+I'm using this primarily for a file-processing pipeline that ingests user uploads. The 0.6 score threshold works well in practice — I haven't had a reason to lower it.
+
 ## License
 
 Apache 2.0 — see [LICENSE](LICENSE) for details.

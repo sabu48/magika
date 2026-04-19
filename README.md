@@ -47,8 +47,9 @@ m = Magika()
 result = m.identify_path("document.pdf")
 
 print(result.output.ct_label)   # e.g. "pdf"
-print(result.output.score)      # confidence score
+print(result.output.score)      # confidence score (0.0 to 1.0)
 print(result.output.mime_type)  # e.g. "application/pdf"
+print(result.output.group)      # e.g. "document"
 ```
 
 ## Supported File Types

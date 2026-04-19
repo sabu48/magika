@@ -52,6 +52,8 @@ print(result.output.mime_type)  # e.g. "application/pdf"
 print(result.output.group)      # e.g. "document"
 ```
 
+> **Note:** Results with a `score` below `0.6` are often unreliable — consider treating them as `unknown` in production pipelines.
+
 ## Supported File Types
 
 Magika supports detection of 200+ file types including:

@@ -54,6 +54,25 @@ print(result.output.group)      # e.g. "document"
 
 > **Note:** Results with a `score` below `0.6` are often unreliable — consider treating them as `unknown` in production pipelines.
 
+### Batch processing example
+
+For processing many files at once (e.g. a directory of user uploads), `identify_paths` is significantly faster than calling `identify_path` in a loop:
+
+```python
+from pathlib import Path
+from magika import Magika
+
+m = Magika()
+paths = list(Path("./uploads").iterdir())
+results = m.identify_paths(paths)
+
+for path, result in zip(paths, results):
+    if result.output.score >= 0.6:
+        print(f"{path.name}: {result.output.ct_label} ({result.output.mime_type})")
+    else:
+        print(f"{path.name}: unknown (low confidence: {result.output.score:.2f})")
+```
+
 ## Supported File Types
 
 Magika supports detection of 200+ file types including:
@@ -104,6 +123,8 @@ For misdetections, please use the [misdetection issue template](.github/ISSUE_TE
 ## Notes (Personal)
 
 I'm using this primarily for a file-processing pipeline that ingests user uploads. The 0.6 score threshold works well in practice — I haven't had a reason to lower it.
+
+The batch processing example above reflects my actual usage pattern — calling `identify_paths` with a full list of `Path` objects is much faster than a loop when dealing with hundreds of files at a time.
 
 ## License
 
